@@ -364,13 +364,13 @@ local function Instance2Luau(Root, Delayed)
         end
     end
 
-    return "local Instances = {\n" .. Concat(Declarations, "\n") .. "\n}\n\n" .. [[local function Set(Object, Property, Value)
-        pcall(function()
-            Object[Property] = Value
-        end)
-    end
-
-    ]] .. Concat(Lines, "\n"), tick() - Start
+    return "local Instances = {\n" .. Concat(Declarations, "\n") .. "\n}\n\n"
+    .. "local function Set(Object, Property, Value)\n"
+    .. "\tpcall(function()\n"
+    .. "\t\tObject[Property] = Value\n"
+    .. "\tend)\n"
+    .. "end\n\n"
+    .. Concat(Lines, "\n"), tick() - Start
 end
 
 return Instance2Luau
